@@ -45,6 +45,10 @@ class VectorStoreManager:
         try:
             vector_store = self.get_vector_store()
             vector_store.add_texts(texts=texts, metadatas=metadatas, ids=ids)
+            try:
+                vector_store.persist()
+            except Exception:
+                pass
             logger.info(f"Successfully indexed {len(chunks)} chunks into vector store using NVIDIA Embeddings.")
         except Exception as e:
             err_msg = str(e)
@@ -59,7 +63,7 @@ class VectorStoreManager:
             raise HTTPException(status_code=500, detail=f"Vector Storage Error: {err_msg}")
 
     def search_similar(self, query: str, top_k: int = 8, doc_filter: List[str] = None) -> List[Dict[str, Any]]:
-        """Searches vector store for relevant chunks using similarity_search with clean score handling."""
+        """Searches vector store for relevant chunks using similarity_search with automatic fallback."""
         try:
             vector_store = self.get_vector_store()
             
@@ -76,6 +80,14 @@ class VectorStoreManager:
                 filter=filter_dict
             )
             
+            # Fallback: If filtered search returns no chunks, search across all documents
+            if not results and filter_dict is not None:
+                logger.info("Filtered search returned 0 chunks. Executing fallback search across full vector corpus...")
+                results = vector_store.similarity_search_with_score(
+                    query=query,
+                    k=top_k
+                )
+
             retrieved_chunks = []
             for doc, score in results:
                 retrieved_chunks.append({

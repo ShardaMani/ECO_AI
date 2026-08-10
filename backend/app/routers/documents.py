@@ -67,6 +67,8 @@ async def list_documents():
         
         doc_summary = {}
         for meta in metadatas:
+            if not meta:
+                continue
             file_name = meta.get("file_name")
             if file_name:
                 if file_name not in doc_summary:
