@@ -133,7 +133,7 @@ export const PolicyChatView: React.FC<PolicyChatViewProps> = ({ documents }) => 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: 'calc(100vh - 130px)', position: 'relative' }}>
       {/* Header Controls Box */}
-      <div className="ui-box" style={{ padding: '14px 20px', display: 'flex', alignItems: 'center', justify: 'space-between' }}>
+      <div className="ui-box" style={{ padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
             width: '38px',
@@ -180,7 +180,7 @@ export const PolicyChatView: React.FC<PolicyChatViewProps> = ({ documents }) => 
             style={{
               display: 'flex',
               gap: '12px',
-              justify: msg.role === 'user' ? 'flex-end' : 'flex-start'
+              justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start'
             }}
           >
             {msg.role === 'assistant' && (

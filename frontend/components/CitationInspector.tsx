@@ -90,7 +90,7 @@ export const CitationInspector: React.FC<CitationInspectorProps> = ({
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justify: 'space-between', paddingBottom: '14px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '14px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
             width: '36px',
@@ -133,7 +133,7 @@ export const CitationInspector: React.FC<CitationInspectorProps> = ({
       </div>
 
       {/* Verification Badge Box */}
-      <div className="badge-emerald" style={{ display: 'flex', alignItems: 'center', justify: 'space-between', padding: '10px 14px', borderRadius: '10px' }}>
+      <div className="badge-emerald" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 14px', borderRadius: '10px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <CheckCircle2 size={16} />
           <span style={{ fontSize: '13px', fontWeight: '600' }}>100% Grounded Source Match</span>

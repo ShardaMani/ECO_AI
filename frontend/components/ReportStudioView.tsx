@@ -159,7 +159,7 @@ export const ReportStudioView: React.FC<ReportStudioViewProps> = ({ documents })
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', position: 'relative' }}>
       {/* Header Banner */}
-      <div className="ui-box" style={{ borderLeft: '4px solid #06b6d4', display: 'flex', alignItems: 'center', justify: 'space-between' }}>
+      <div className="ui-box" style={{ borderLeft: '4px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#38bdf8', fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', marginBottom: '4px' }}>
             <Sparkles size={16} />
@@ -211,7 +211,7 @@ export const ReportStudioView: React.FC<ReportStudioViewProps> = ({ documents })
                     handleGenerateReport(sp);
                   }}
                   className="btn-ghost-dark"
-                  style={{ fontSize: '13px', textAlign: 'left', display: 'flex', alignItems: 'center', justify: 'space-between' }}
+                  style={{ fontSize: '13px', textAlign: 'left', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                 >
                   <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{sp}</span>
                   <ArrowRight size={14} style={{ opacity: 0.6 }} />
@@ -263,7 +263,7 @@ export const ReportStudioView: React.FC<ReportStudioViewProps> = ({ documents })
         {/* Right Column: Live Markdown Report Preview */}
         <div>
           {!reportMarkdown ? (
-            <div className="ui-box" style={{ textAlign: 'center', padding: '60px 20px', minHeight: '400px', display: 'flex', flexDirection: 'column', bg: 'rgba(15, 23, 42, 0.5)', border: '1px dashed rgba(255, 255, 255, 0.15)', alignItems: 'center', justify: 'center', gap: '12px' }}>
+            <div className="ui-box" style={{ textAlign: 'center', padding: '60px 20px', minHeight: '400px', display: 'flex', flexDirection: 'column', background: 'rgba(15, 23, 42, 0.5)', border: '1px dashed rgba(255, 255, 255, 0.15)', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
               <BookOpen size={40} style={{ color: '#64748b', opacity: 0.5 }} />
               <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#fff', margin: 0 }} className="font-heading">Report Canvas Empty</h3>
               <p style={{ fontSize: '14px', color: '#64748b', maxWidth: '340px', margin: 0 }}>
@@ -272,7 +272,7 @@ export const ReportStudioView: React.FC<ReportStudioViewProps> = ({ documents })
             </div>
           ) : (
             <div className="ui-box" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justify: 'space-between', paddingBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <FileText size={20} style={{ color: '#38bdf8' }} />
                   <h2 style={{ fontSize: '18px', fontWeight: '700', color: '#fff', margin: 0 }} className="font-heading">Synthesized Policy Report</h2>
