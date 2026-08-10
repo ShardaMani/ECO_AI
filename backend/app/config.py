@@ -20,24 +20,22 @@ class Settings(BaseSettings):
     
     # NVIDIA Model Choices
     NVIDIA_LLM_MODEL: str = "meta/llama-3.1-70b-instruct"
-    
-    # NVIDIA NIM Embedding Model (512 token limit)
     NVIDIA_EMBED_MODEL: str = os.getenv("NVIDIA_EMBED_MODEL", "nvidia/nv-embedqa-e5-v5")
     
     # Database URL
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./ecoresearch.db")
     
     # CORS string
-    ALLOWED_ORIGINS_RAW: str = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+    ALLOWED_ORIGINS_RAW: str = os.getenv("ALLOWED_ORIGINS", "*")
     
-    # Vector Chunking Configuration (Safely set to 400 to respect 512 token ceiling)
+    # Vector Chunking Configuration
     CHUNK_SIZE: int = 400
     CHUNK_OVERLAP: int = 80
 
     @property
     def ALLOWED_ORIGINS(self) -> list[str]:
-        if not self.ALLOWED_ORIGINS_RAW:
-            return ["http://localhost:3000", "http://127.0.0.1:3000"]
+        if not self.ALLOWED_ORIGINS_RAW or self.ALLOWED_ORIGINS_RAW == "*":
+            return ["*"]
         return [origin.strip() for origin in self.ALLOWED_ORIGINS_RAW.split(",") if origin.strip()]
 
 settings = Settings()

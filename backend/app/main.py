@@ -9,23 +9,24 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Backend service for EcoResearch AI - Sustainability Policy Analysis Workspace"
+    description="Backend API for EcoResearch AI - Powered by LangChain, LangGraph & NVIDIA NIM API"
 )
 
-# Configure CORS
+# Universal CORS Middleware Configuration (Allows Vercel, Render, and Local dev)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Register routers
+# Register API Routers
 app.include_router(documents.router)
 app.include_router(chat.router)
 app.include_router(reports.router)
@@ -34,21 +35,16 @@ app.include_router(reports.router)
 async def root():
     return {
         "status": "online",
-        "app": settings.PROJECT_NAME,
+        "service": settings.PROJECT_NAME,
         "version": settings.VERSION,
-        "message": "EcoResearch AI Backend is running."
+        "docs_url": "/docs"
     }
 
 @app.get("/health")
 async def health_check():
-    has_nvidia_key = bool(settings.NVIDIA_API_KEY and settings.NVIDIA_API_KEY.startswith("nvapi-"))
     return {
         "status": "healthy",
-        "nvidia_api_key_configured": has_nvidia_key,
+        "nvidia_api_key_configured": bool(settings.NVIDIA_API_KEY),
         "llm_model": settings.NVIDIA_LLM_MODEL,
         "embed_model": settings.NVIDIA_EMBED_MODEL
     }
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
